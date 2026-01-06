@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi import BackgroundTasks
 from app.models.jobs import DownloadRequest
+from app.services.downloader import download_media
 
 app = FastAPI(
     title="YouTube Downloader API",
@@ -14,5 +15,10 @@ def root():
 
 @app.post("/download")
 def create_download_task(data: DownloadRequest, background_tasks: BackgroundTasks):
-    # (vamos implementar já já)
-    return {"status": "queued"}
+    background_tasks.add_task(download_media, data.url, data.format)
+
+    return {
+        "message": "Download iniciado",
+        "url": data.url,
+        "format": data.format
+    }
