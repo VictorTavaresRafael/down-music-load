@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Down Music Loand</title>
+  <meta name="description" content="Baixe músicas em MP3 e vídeos em MP4, inclusive playlists, direto do seu servidor." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="/">
+      <img src="favicon.svg" alt="" width="28" height="28" />
+      <span>Down Music <strong>Loand</strong></span>
+    </a>
+    <div class="topbar-right">
+      <span id="health" class="pill pill-muted" title="Status do servidor">conectando…</span>
+      <a class="icon-link" href="/docs" title="Documentação da API" target="_blank" rel="noopener">API</a>
+      <button id="theme-toggle" class="icon-btn" type="button" aria-label="Alternar tema">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Sua música, <span class="grad">offline</span>.</h1>
+      <p class="lead">Cole um link do YouTube (ou de <a href="https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md" target="_blank" rel="noopener">mais de mil sites</a>) e baixe em MP3 ou MP4. Playlists inteiras viram um .zip.</p>
+    </section>
+
+    <form id="download-form" class="card form-card" autocomplete="off">
+      <div id="ffmpeg-warning" class="alert" hidden>
+        <strong>ffmpeg não encontrado.</strong> Conversão para MP3 e junção de áudio+vídeo precisam dele.
+        Veja como instalar no <a href="https://github.com/VictorTavaresRafael/down-music-loand#requisitos" target="_blank" rel="noopener">README</a>.
+      </div>
+
+      <label class="sr-only" for="url">URL do vídeo ou playlist</label>
+      <div class="url-row">
+        <svg class="url-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M10.6 13.4a1 1 0 0 1 0-1.4l3-3a1 1 0 1 1 1.4 1.4l-3 3a1 1 0 0 1-1.4 0Zm-2.1 5.3a4 4 0 0 1-2.8-6.8l2-2a1 1 0 0 1 1.4 1.4l-2 2a2 2 0 1 0 2.8 2.8l2-2a1 1 0 0 1 1.4 1.4l-2 2a4 4 0 0 1-2.8 1.2Zm7-5.3a1 1 0 0 1-.7-1.7l2-2a2 2 0 1 0-2.8-2.8l-2 2a1 1 0 0 1-1.4-1.4l2-2a4 4 0 1 1 5.6 5.6l-2 2a1 1 0 0 1-.7.3Z"/></svg>
+        <input id="url" name="url" type="url" required placeholder="https://www.youtube.com/watch?v=…" spellcheck="false" />
+        <button id="paste-btn" type="button" class="btn btn-ghost btn-sm">Colar</button>
+      </div>
+
+      <div class="options">
+        <div class="segmented" role="radiogroup" aria-label="Formato">
+          <input type="radio" id="fmt-mp3" name="format" value="mp3" checked />
+          <label for="fmt-mp3">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 18V6l11-2v12" opacity=".35"/><path fill="currentColor" d="M20 4v11.5a3.5 3.5 0 1 1-2-3.2V7.2l-7 1.3v9a3.5 3.5 0 1 1-2-3.2V6a1 1 0 0 1 .8-1l9-1.8A1 1 0 0 1 20 4Z"/></svg>
+            MP3
+          </label>
+          <input type="radio" id="fmt-mp4" name="format" value="mp4" />
+          <label for="fmt-mp4">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M4 5h11a2 2 0 0 1 2 2v1.5l3.4-2.3A1 1 0 0 1 22 7v10a1 1 0 0 1-1.6.8L17 15.5V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/></svg>
+            MP4
+          </label>
+        </div>
+
+        <label class="field" id="bitrate-field">
+          <span>Qualidade</span>
+          <select name="audio_bitrate">
+            <option value="320">320 kbps</option>
+            <option value="192" selected>192 kbps</option>
+            <option value="128">128 kbps</option>
+          </select>
+        </label>
+
+        <label class="field" id="quality-field" hidden>
+          <span>Resolução</span>
+          <select name="quality">
+            <option value="best" selected>Melhor disponível</option>
+            <option value="1080">1080p</option>
+            <option value="720">720p</option>
+            <option value="480">480p</option>
+            <option value="360">360p</option>
+          </select>
+        </label>
+
+        <label class="switch">
+          <input type="checkbox" name="playlist" id="playlist" />
+          <span class="track"><span class="thumb"></span></span>
+          <span>Playlist inteira</span>
+        </label>
+      </div>
+
+      <div id="preview" class="preview" hidden></div>
+
+      <div class="actions">
+        <button id="preview-btn" type="button" class="btn btn-ghost">Pré-visualizar</button>
+        <button id="submit-btn" type="submit" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 3a1 1 0 0 1 1 1v9.6l3.3-3.3a1 1 0 1 1 1.4 1.4l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 1 1 1.4-1.4l3.3 3.3V4a1 1 0 0 1 1-1ZM5 19h14a1 1 0 1 1 0 2H5a1 1 0 1 1 0-2Z"/></svg>
+          Baixar
+        </button>
+      </div>
+      <p id="form-error" class="form-error" role="alert" hidden></p>
+    </form>
+
+    <section class="downloads">
+      <div class="section-head">
+        <h2>Downloads</h2>
+        <button id="clear-btn" type="button" class="btn btn-ghost btn-sm" hidden>Limpar concluídos</button>
+      </div>
+      <ul id="jobs" class="jobs"></ul>
+      <div id="empty" class="empty">
+        <svg viewBox="0 0 24 24" width="40" height="40" aria-hidden="true"><path fill="currentColor" d="M20 4v11.5a3.5 3.5 0 1 1-2-3.2V7.2l-7 1.3v9a3.5 3.5 0 1 1-2-3.2V6a1 1 0 0 1 .8-1l9-1.8A1 1 0 0 1 20 4Z"/></svg>
+        <p>Nada por aqui ainda. Cole um link aí em cima.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Projeto open source · <a href="https://github.com/VictorTavaresRafael/down-music-loand" target="_blank" rel="noopener">GitHub</a> · Feito com FastAPI + yt-dlp</p>
+    <p class="muted">Baixe apenas conteúdo que você tem direito de baixar.</p>
+  </footer>
+
+  <template id="job-template">
+    <li class="job card">
+      <div class="job-thumb"><img alt="" loading="lazy" /></div>
+      <div class="job-body">
+        <div class="job-top">
+          <p class="job-title"></p>
+          <span class="badge"></span>
+        </div>
+        <p class="job-meta"></p>
+        <div class="progress"><div class="progress-bar"></div></div>
+        <p class="job-error" hidden></p>
+      </div>
+      <div class="job-actions">
+        <a class="btn btn-primary btn-sm job-save" hidden>Salvar</a>
+        <button type="button" class="icon-btn job-remove" aria-label="Remover">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6.4 5 12 10.6 17.6 5 19 6.4 13.4 12l5.6 5.6-1.4 1.4-5.6-5.6L6.4 19 5 17.6l5.6-5.6L5 6.4 6.4 5Z"/></svg>
+        </button>
+      </div>
+    </li>
+  </template>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

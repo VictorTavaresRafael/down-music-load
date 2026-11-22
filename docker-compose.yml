@@ -1,0 +1,10 @@
+services:
+  app:
+    build: ./youtube-downloader
+    ports:
+      - "8000:8000"
+    environment:
+      MAX_CONCURRENT_DOWNLOADS: "2"
+    volumes:
+      - ./downloads:/data/downloads
+    restart: unless-stopped
