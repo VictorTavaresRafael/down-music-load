@@ -2,13 +2,13 @@
 
 <img src="youtube-downloader/app/static/favicon.svg" width="72" alt="logo" />
 
-# Down Music Loand
+# Down Music Load
 
 **Baixe músicas em MP3 e vídeos em MP4 — inclusive playlists inteiras — pelo navegador, no seu próprio servidor.**
 
 FastAPI + yt-dlp no backend, HTML/CSS/JS puro no frontend. Sem build, sem banco, sem conta.
 
-[![CI](https://github.com/VictorTavaresRafael/down-music-loand/actions/workflows/ci.yml/badge.svg)](https://github.com/VictorTavaresRafael/down-music-loand/actions/workflows/ci.yml)
+[![CI](https://github.com/VictorTavaresRafael/down-music-load/actions/workflows/ci.yml/badge.svg)](https://github.com/VictorTavaresRafael/down-music-load/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/python-3.11%2B-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.128-009688?logo=fastapi&logoColor=white)
 [![License: MIT](https://img.shields.io/badge/license-MIT-8b5cf6.svg)](LICENSE)
@@ -17,7 +17,7 @@ FastAPI + yt-dlp no backend, HTML/CSS/JS puro no frontend. Sem build, sem banco,
 </div>
 
 <p align="center">
-  <img src="docs/screenshot.png" alt="Interface do Down Music Loand mostrando downloads em andamento e concluídos" width="860" />
+  <img src="docs/screenshot.png" alt="Interface do Down Music Load mostrando downloads em andamento e concluídos" width="860" />
 </p>
 
 ---
@@ -40,8 +40,8 @@ FastAPI + yt-dlp no backend, HTML/CSS/JS puro no frontend. Sem build, sem banco,
 ### Com Docker (mais fácil — já inclui o ffmpeg)
 
 ```bash
-git clone https://github.com/VictorTavaresRafael/down-music-loand.git
-cd down-music-loand
+git clone https://github.com/VictorTavaresRafael/down-music-load.git
+cd down-music-load
 docker compose up --build
 ```
 
@@ -139,13 +139,13 @@ ruff check .
 
 ## 🗺️ Roadmap
 
-- [ ] Persistir histórico de downloads em SQLite ([#1](https://github.com/VictorTavaresRafael/down-music-loand/issues/1))
-- [ ] Cancelar download em andamento ([#2](https://github.com/VictorTavaresRafael/down-music-loand/issues/2))
-- [ ] Limpeza automática de arquivos antigos ([#3](https://github.com/VictorTavaresRafael/down-music-loand/issues/3)) · `good first issue`
-- [ ] Atualizações de progresso via SSE ([#4](https://github.com/VictorTavaresRafael/down-music-loand/issues/4))
-- [ ] Recorte de trecho (início/fim) ([#5](https://github.com/VictorTavaresRafael/down-music-loand/issues/5))
-- [ ] PWA instalável no celular ([#6](https://github.com/VictorTavaresRafael/down-music-loand/issues/6)) · `good first issue`
-- [ ] Interface em PT-BR / EN ([#7](https://github.com/VictorTavaresRafael/down-music-loand/issues/7)) · `good first issue`
+- [ ] Persistir histórico de downloads em SQLite ([#1](https://github.com/VictorTavaresRafael/down-music-load/issues/1))
+- [ ] Cancelar download em andamento ([#2](https://github.com/VictorTavaresRafael/down-music-load/issues/2))
+- [ ] Limpeza automática de arquivos antigos ([#3](https://github.com/VictorTavaresRafael/down-music-load/issues/3)) · `good first issue`
+- [ ] Atualizações de progresso via SSE ([#4](https://github.com/VictorTavaresRafael/down-music-load/issues/4))
+- [ ] Recorte de trecho (início/fim) ([#5](https://github.com/VictorTavaresRafael/down-music-load/issues/5))
+- [ ] PWA instalável no celular ([#6](https://github.com/VictorTavaresRafael/down-music-load/issues/6)) · `good first issue`
+- [ ] Interface em PT-BR / EN ([#7](https://github.com/VictorTavaresRafael/down-music-load/issues/7)) · `good first issue`
 
 Quer pegar algum? Comente na issue e veja o [CONTRIBUTING.md](CONTRIBUTING.md).
 

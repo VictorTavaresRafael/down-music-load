@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name
 STATIC_DIR = Path(__file__).parent / "static"
 
 app = FastAPI(
-    title="Down Music Loand",
+    title="Down Music Load",
     description="API self-hosted para baixar áudios (MP3) e vídeos (MP4) — inclusive playlists — com yt-dlp.",
     version=__version__,
 )
