@@ -16,6 +16,10 @@ FastAPI + yt-dlp no backend, HTML/CSS/JS puro no frontend. Sem build, sem banco,
 
 </div>
 
+<p align="center">
+  <img src="docs/screenshot.png" alt="Interface do Down Music Loand mostrando downloads em andamento e concluídos" width="860" />
+</p>
+
 ---
 
 ## ✨ Funcionalidades
