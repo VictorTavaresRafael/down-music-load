@@ -139,14 +139,15 @@ ruff check .
 
 ## 🗺️ Roadmap
 
-- [ ] Persistir histórico de downloads (SQLite)
-- [ ] Cancelar download em andamento
-- [ ] Limpeza automática de arquivos antigos
-- [ ] Atualizações de progresso via WebSocket/SSE
-- [ ] Recorte de trecho (início/fim) do áudio
-- [ ] PWA instalável no celular
+- [ ] Persistir histórico de downloads em SQLite ([#1](https://github.com/VictorTavaresRafael/down-music-loand/issues/1))
+- [ ] Cancelar download em andamento ([#2](https://github.com/VictorTavaresRafael/down-music-loand/issues/2))
+- [ ] Limpeza automática de arquivos antigos ([#3](https://github.com/VictorTavaresRafael/down-music-loand/issues/3)) · `good first issue`
+- [ ] Atualizações de progresso via SSE ([#4](https://github.com/VictorTavaresRafael/down-music-loand/issues/4))
+- [ ] Recorte de trecho (início/fim) ([#5](https://github.com/VictorTavaresRafael/down-music-loand/issues/5))
+- [ ] PWA instalável no celular ([#6](https://github.com/VictorTavaresRafael/down-music-loand/issues/6)) · `good first issue`
+- [ ] Interface em PT-BR / EN ([#7](https://github.com/VictorTavaresRafael/down-music-loand/issues/7)) · `good first issue`
 
-Quer pegar algum? Veja o [CONTRIBUTING.md](CONTRIBUTING.md).
+Quer pegar algum? Comente na issue e veja o [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## ⚠️ Aviso legal
 
