@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: down-music-load-api
+    runtime: docker
+    dockerContext: ./youtube-downloader
+    dockerfilePath: ./youtube-downloader/Dockerfile
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: DOWNLOAD_DIR
+        value: /tmp/downloads
+      # URL do frontend na Vercel, ex.: https://down-music-load.vercel.app
+      - key: CORS_ORIGINS
+        sync: false

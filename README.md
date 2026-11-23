@@ -79,6 +79,15 @@ Tudo via variáveis de ambiente:
 | `FFMPEG_LOCATION` | — | Caminho do ffmpeg, se não estiver no `PATH` |
 | `CORS_ORIGINS` | `*` | Origens permitidas, separadas por vírgula |
 
+## ☁️ Deploy (Render + Vercel)
+
+O backend precisa de ffmpeg, disco e processos longos, então **não roda na Vercel**. A divisão é:
+
+1. **Backend no Render:** *New → Blueprint*, aponte para este repositório (usa o `render.yaml`). Depois do primeiro deploy, defina `CORS_ORIGINS` com a URL do frontend (ex.: `https://down-music-load.vercel.app`). No plano free o serviço hiberna e os arquivos somem ao reiniciar.
+2. **Frontend na Vercel:** importe o repositório (raiz, sem framework; o `vercel.json` já configura tudo) e crie a variável de ambiente `API_URL` com a URL do Render (ex.: `https://down-music-load-api.onrender.com`).
+
+> O YouTube pode bloquear IPs de datacenter (Render incluso); se os downloads falharem lá, rode o backend na sua máquina ou numa VPS.
+
 ## 🔌 API
 
 | Método | Rota | Descrição |

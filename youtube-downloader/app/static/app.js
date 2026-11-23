@@ -1,7 +1,11 @@
 (() => {
   "use strict";
 
-  const API = "/api";
+  // Em deploy separado (frontend na Vercel), config.js define a URL do backend.
+  const BASE = (window.DML_API_BASE || "").replace(/\/+$/, "");
+  const API = BASE + "/api";
+  const docsLink = document.querySelector('a[href="/docs"]');
+  if (docsLink) docsLink.href = BASE + "/docs";
   const ACTIVE = new Set(["queued", "downloading", "processing"]);
   const STATUS_LABEL = {
     queued: "Na fila",

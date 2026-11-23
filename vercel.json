@@ -1,0 +1,6 @@
+{
+  "framework": null,
+  "installCommand": "echo skip",
+  "buildCommand": "printf 'window.DML_API_BASE = \"%s\";\\n' \"$API_URL\" > youtube-downloader/app/static/config.js",
+  "outputDirectory": "youtube-downloader/app/static"
+}
